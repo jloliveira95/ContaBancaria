@@ -1,21 +1,29 @@
+// Pacote: conta.model
+// Classe Abstrata: Conta
+// Descrição: Representa uma conta bancária genérica
+
 package conta.model;
 
 public abstract class Conta {
 	
+		// Atributos comuns a todas as contas bancárias
 	  	private int numero;
 		private int agencia;
 		private int tipo;
 		private String titular;
 		private float saldo;
 		
+		// Construtor para inicializar a conta
 		public Conta(int numero, int agencia, int tipo, String titular, float saldo) {
 			this.numero = numero;
 			this.agencia = agencia;
 			this.tipo = tipo;
 			this.titular = titular;
 			this.saldo = saldo;
-		}
 
+		}
+		
+		// Getters e Setters para acessar e modificar os atributos
 		public int getNumero() {
 			return numero;
 		}
@@ -55,33 +63,42 @@ public abstract class Conta {
 		public void setSaldo(float saldo) {
 			this.saldo = saldo;
 		}
-		
+
+		// Método para realizar saque
 		public boolean sacar(float valor) {
-			if (this.getSaldo() < valor) {
-				System.out.println("Vaor insuficiente!");
-				return false;
-			} 
-			this.setSaldo(getSaldo() - valor);
-			return true;
+		    if (this.saldo >= valor) {
+		        this.saldo -= valor;
+		        System.out.println("Saque de R$" + valor + " realizado com sucesso!");
+		        return true;
+		    }
+		    System.out.println("Saldo insuficiente.");
+		    return false;
 		}
 		
+		public void visualizar() {
+		    System.out.println(this.toString());
+		    String tipo = obterTipoConta();
+		}
+		
+		@Override
+		public String toString() {
+		    String tipoConta = obterTipoConta();
+		    return "\n\n******************" +
+		           "\nDados da Conta:" +
+		           "\n********************" +
+		           "\nNúmero da Conta: " + this.numero +
+		           "\nAgência: " + this.agencia +
+		           "\nTipo da Conta: " + tipoConta +
+		           "\nTitular: " + this.titular +
+		           "\nSaldo: " + this.saldo;
+		}
+		
+		// Método para realizar depósito
 		public void depositar(float valor) {
 			this.setSaldo(getSaldo() + valor);
+			System.out.println("Depósito realizado com sucesso.");
 		}
-		public void visualizar() {
-			String tipo = obterTipoConta();
-			
-			System.out.println("\n\n***********************************************************");
-			System.out.println("Dados da Conta:");
-			System.out.println("***********************************************************");
-			System.out.println("Numero da Conta: " + this.numero);
-			System.out.println("Agência: " + this.agencia);
-			System.out.println("Tipo da Conta: " + tipo);
-			System.out.println("Titular: " + this.titular);
-			System.out.println("Saldo: " + this.saldo);
-			
-		}
-
+		
 		private String obterTipoConta() {
 			String tipo = "";
 			

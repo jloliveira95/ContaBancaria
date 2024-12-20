@@ -1,19 +1,18 @@
+// Pacote: conta.repository
+// Interface: ContaRepository
+// Descrição: Define as operações para manipular contas bancárias
+
 package conta.repository;
+
+import java.util.List;
 
 import conta.model.Conta;
 
 public interface ContaRepository {
 
-	// CRUD da Conta
-	public void procurarPorNumero(int numero);
-	public void listarTodas();
-	public void cadastrar(Conta conta);
-	public void atualizar(Conta conta);
-	public void deletar(int numero);
-	
-	// Métodos Bancários
-	public void sacar(int numero, float valor);
-	public void depositar(int numero, float valor);
-	public void transferir(int numeroOrigem, int numeroDestino, float valor);
-	
-}  
+	void cadastrar(Conta conta); // Método para cadastrar uma nova conta
+    List<Conta> listarTodas(); // Método para listar todas as contas
+    void deletar(int numero); // Método para deletar uma conta
+    void atualizar(Conta conta); // Método para atualizar as informações de uma conta
+    Conta buscar(int numero); // Método para buscar uma conta pelo número
+}
